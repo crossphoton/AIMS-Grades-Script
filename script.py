@@ -1,5 +1,5 @@
 import requests
-import time
+import time, os
 import smtplib, datetime
 from email.message import EmailMessage
 
@@ -15,14 +15,12 @@ mapper = {
 	"A+": 10, "A": 10, "A-": 9, "B": 8, "B-": 7, "C": 6, "C-": 5, "D": 4, "S": 0
 }
 
-email = ""				#Update this with sender's email address
-password = ""			#Update this with corresponding email address's password
+email = os.environ['email']
+password = os.environ['password']
 
-#Change URL if another institute (Not IIITR or URL is changed)
-url = 'https://aims.iiitr.ac.in/iiitraichur/courseReg/loadMyCoursesHistroy?studentId=0&courseCd=&courseName=&orderBy=1&degreeIds=&acadPeriodIds=&regTypeIds=&gradeIds=&resultIds=&isGradeIds='
-token = str(input("Cookie value: "))
-cookie = {'JSESSIONID' : token}
-academicPeriod = int(input("Academic Period ID: "))
+url = 'https://aims.iiitr.ac.in/iiitraichur/courseReg/loadMyCoursesHistroy?studentId=3&courseCd=&courseName=&orderBy=1&degreeIds=&acadPeriodIds=&regTypeIds=&gradeIds=&resultIds=&isGradeIds='
+cookie = {'JSESSIONID' : os.environ['cookie']}
+academicPeriod = int(os.environ['period'])
 
 def sendEmail(r, cgpa, totalCredit):
 	try:
@@ -33,13 +31,13 @@ def sendEmail(r, cgpa, totalCredit):
 			gradeData = ""
 
 			for course in r:
-				if course["acadPeriodId"] == academicPeriod:
+				if course["acadPeriodId"] == academicPeriod and course["gradeDesc"] != "":
 					gradeData += f'{course["courseName"]} : {course["gradeDesc"]}\n'
 				
 
 			msg["subject"] = "Semester Grades Uploaded"
-			msg["To"] = ""									# Update this with sender's address
-			msg["From"] = ""								# Update this with reciever(s) address(es)
+			msg["To"] = os.environ['receiver']
+			msg["From"] = f'AIMS Script<{email}>'
 			msg.set_content("Semester Result\n\nYour CGPA till now for the semester is " + str(cgpa/totalCredit) + ". Below is a breakdown of grades. Have a nice day.\n\n" + gradeData)
 
 			smtp.send_message(msg)
@@ -52,6 +50,7 @@ def sendEmail(r, cgpa, totalCredit):
 def gradeChecker(tillNow):
 
 	r = requests.get(url, cookies=cookie).json()
+	requests.get(os.environ['web'])
 
 	courseCount = 0
 	currentCount = 0
@@ -72,7 +71,7 @@ def gradeChecker(tillNow):
 		sendEmail(r, cgpa, totalCredit)
 		tillNow = currentCount
 	if(courseCount != currentCount):
-		print(f'[{datetime.datetime.now()}] {currentCount}/{courseCount} courses till now. Trying again in an hour.....')
+		print(f'[{datetime.datetime.now()}] {currentCount}/{courseCount} courses till now. Trying again in 10 mins.....')
 		time.sleep(600)
 		gradeChecker(tillNow)
 	else:
