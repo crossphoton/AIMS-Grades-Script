@@ -1,0 +1,11 @@
+{
+  "name": "AIMS-Grades-Script",
+  "description": "A app to get notifications(email) for grade changes on IIITR AIMS portal",
+  "repository": "https://github.com/crossphoton/AIMS-Grades-Script",
+  "logo": "https://aims.iiitr.ac.in/iiitraichur/version1.0.04/images/aims_logo.png",
+  "keywords": ["python", "aims", "heroku"],
+  "image": "heroku/python",
+  "buildpacks": [
+    {"url": "heroku/python"}
+  ]
+}
