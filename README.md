@@ -1,4 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/crossphoton/AIMS-Grades-Script/tree/test-heroku)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/crossphoton/AIMS-Grades-Script/)
 
 # AIMS-Grades-Script
 
