@@ -8,9 +8,6 @@ print("Wait and watch")
 print("--------------------------------------------------------------------------")
 print("Make sure you provide the cookie and courseId while running\n\n")
 
-
-msg = EmailMessage()
-
 mapper = {
 	"A+": 10, "A": 10, "A-": 9, "B": 8, "B-": 7, "C": 6, "C-": 5, "D": 4, "S": 0
 }
@@ -34,6 +31,7 @@ def sendEmail(r, cgpa, totalCredit):
 				if course["acadPeriodId"] == academicPeriod and course["gradeDesc"] != "":
 					gradeData += f'{course["courseName"]} : {course["gradeDesc"]}\n'
 				
+			msg = EmailMessage()
 
 			msg["subject"] = "Semester Grades Uploaded"
 			msg["To"] = os.environ['receiver']
