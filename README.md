@@ -4,11 +4,11 @@
 
 **Exculsively for IIIT Raichur students
 
-** Can be used for other institute AIMS portal too. Change the url for that. (Eg. IITH, IIIT Dharwad [Didn't tried it though])
+** Can be used for other institute AIMS portal too. Change the url for that. (Eg. IITH, IIIT Dharwad [Haven't tried it though])
 
 By running this script you don't have to check for your grades again and again on the institute AIMS portal, instead you'll get an email whenever there's an update
 
-## How to use (Heroku - obv better)
+## How to use (Heroku - obv. better)
 
 Click on the deploy button above and create an app.
 
@@ -22,7 +22,7 @@ cookie (As shown below)
 email (Gmail account email address to send email)
 password (Password for given gmail account [Use app passwords])
 period (Academic Period)
-reciever (Reciever's email address)
+receiver (Receiver's email address)
 web (your app url[Use open app button])
 ```
 ![Set Env](assets/env.png)

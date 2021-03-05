@@ -5,7 +5,31 @@
   "logo": "https://aims.iiitr.ac.in/iiitraichur/version1.0.04/images/aims_logo.png",
   "keywords": ["python", "aims", "heroku"],
   "image": "heroku/python",
-  "buildpacks": [
-    {"url": "heroku/python"}
-  ]
+  "buildpacks": [{ "url": "heroku/python" }],
+  "env": {
+    "cookie": {
+      "desc": "The cookie you got from your browsers dev-tools",
+      "value": ""
+    },
+    "email": {
+      "desc": "Email to send grade email from",
+      "value": ""
+    },
+    "password": {
+      "desc": "Password for that email (Hint: Use Google App Passwords for Google Accounts)",
+      "value": ""
+    },
+    "period": {
+      "desc": "Email to send grade email from",
+      "value": ""
+    },
+    "receiver": {
+      "desc": "Email to send grade email from",
+      "value": ""
+    },
+    "web": {
+      "desc": "Address of this heroku app",
+      "value": ""
+    }
+  }
 }
